@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="ru" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Justice AI — правовой AI-холдинг</title>
+<meta name="description" content="Justice AI создаёт AI-инструменты, с которыми человек защищает свои права наравне с автоматизированными системами государства.">
+<link rel="canonical" href="https://justice-ai.tech/ru/">
+<link rel="alternate" hreflang="en" href="https://justice-ai.tech/">
+<link rel="alternate" hreflang="ru" href="https://justice-ai.tech/ru/">
+<link rel="alternate" hreflang="zh-Hans" href="https://justice-ai.tech/zh/">
+<link rel="alternate" hreflang="ar" href="https://justice-ai.tech/ar/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Justice AI — правовой AI-холдинг">
+<meta property="og:description" content="Justice AI создаёт AI-инструменты, с которыми человек защищает свои права наравне с автоматизированными системами государства.">
+<meta property="og:url" content="https://justice-ai.tech/ru/">
+<meta name="robots" content="index,follow">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Arabic:wght@400;600&family=Noto+Serif+SC:wght@600&display=swap">
+<style>
+:root{--paper:#eef1ee;--surface:#f7f9f7;--ink:#16201d;--ink-soft:#4b5753;--rule:#c9d1cd;--jade:#2f6b5e;--jade-tint:#d9e7e2;--seal:#a8382b;
+--font-display:"Spectral","Noto Serif SC","Georgia",serif;--font-body:"IBM Plex Sans","IBM Plex Sans Arabic","Segoe UI","Helvetica Neue",Arial,sans-serif;--font-mono:"IBM Plex Mono",Consolas,monospace}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--paper:#111816;--surface:#18211e;--ink:#e3e9e6;--ink-soft:#a3b0ab;--rule:#2c3833;--jade:#7fbfae;--jade-tint:#1f332d;--seal:#e0796b;color-scheme:dark}}
+:root[data-theme="dark"]{--paper:#111816;--surface:#18211e;--ink:#e3e9e6;--ink-soft:#a3b0ab;--rule:#2c3833;--jade:#7fbfae;--jade-tint:#1f332d;--seal:#e0796b;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--font-body);font-size:1rem;line-height:1.6;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+a{color:var(--jade);text-underline-offset:3px}
+a:focus-visible,button:focus-visible{outline:2px solid var(--jade);outline-offset:3px}
+.wrap{max-width:60rem;margin:0 auto}
+.top{display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;padding-block:1.25rem;border-bottom:1px solid var(--rule);font-size:.92rem}
+.top a{color:var(--ink);text-decoration:none}.top a:hover{color:var(--jade)}
+.brand{font-weight:600;letter-spacing:.02em}
+.langs{display:flex;gap:.9rem;flex-wrap:wrap;align-items:center}
+.langs a[aria-current="page"]{color:var(--jade);font-weight:600}
+h1,h2,h3{font-family:var(--font-display);font-weight:600;line-height:1.15;text-wrap:balance;margin:0}
+p{margin:0}
+section{padding-block:3.5rem;border-bottom:1px solid var(--rule)}
+.hero{padding-block:4.5rem 3.5rem}
+.hero h1{font-size:clamp(2.2rem,5.5vw,3.6rem);max-width:18ch}
+.lead{font-size:1.2rem;max-width:40rem}
+.stack{display:flex;flex-direction:column;gap:1.25rem}
+h2{font-size:clamp(1.6rem,3.5vw,2.1rem)}
+.body{max-width:40rem}
+.pillars{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:2rem;border-top:1px solid var(--ink);padding-top:1.5rem}
+.pillars h3{font-family:var(--font-body);font-size:1.05rem;margin-bottom:.4rem}
+.pillars p{color:var(--ink-soft)}
+@media (max-width:720px){.pillars{grid-template-columns:1fr;gap:1.25rem}}
+.products{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.5rem}
+@media (max-width:720px){.products{grid-template-columns:1fr}}
+.product{background:var(--surface);border:1px solid var(--rule);padding:1.5rem;display:flex;flex-direction:column;gap:.8rem;min-width:0}
+.tag{font-family:var(--font-mono);font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft)}
+.tag.live{color:var(--jade)}
+.product h3{font-size:1.6rem}
+.product p{color:var(--ink-soft);flex:1}
+.mark{display:grid;grid-template-columns:repeat(3,1.6rem);gap:2px;background:var(--ink);border:2px solid var(--ink);width:max-content}
+.mark span{background:var(--surface);display:grid;place-items:center;font-family:var(--font-display);font-size:.9rem;height:1.6rem}
+.mark span.c{color:var(--seal)}
+.mail-row{display:flex;flex-wrap:wrap;gap:.75rem;align-items:center}
+.mail{font-family:var(--font-mono);font-size:1.05rem;user-select:all;overflow-wrap:anywhere}
+.copy{font:inherit;font-size:.85rem;border:1px solid var(--rule);background:transparent;color:var(--ink);padding:.35rem .7rem;cursor:pointer;border-radius:2px}
+.copy:hover{border-color:var(--jade)}
+footer{padding-block:2rem 3rem;font-size:.88rem;color:var(--ink-soft);display:flex;gap:1rem;flex-wrap:wrap;justify-content:space-between}
+[dir="rtl"] .hero h1{max-width:22ch}
+</style>
+</head>
+<body>
+<header class="top wrap">
+  <a class="brand" href="./">Justice AI</a>
+  <nav class="langs" aria-label="Language"><a href="../" lang="en" hreflang="en">EN</a><a href="./" aria-current="page" lang="ru" hreflang="ru">RU</a><a href="../zh/" lang="zh-Hans" hreflang="zh-Hans">中文</a><a href="../ar/" lang="ar" hreflang="ar">عربي</a><a href="#contact">Контакты</a></nav>
+</header>
+<main>
+<section class="hero"><div class="wrap stack">
+  <h1>Справедливость не должна зависеть от того, сколько вы можете заплатить.</h1>
+  <p class="lead">Justice AI создаёт AI-инструменты, с которыми граждане и малый бизнес защищают свои права наравне с автоматизированными системами государства.</p>
+</div></section>
+<section><div class="wrap stack">
+  <h2>Что мы делаем</h2>
+  <p class="body">Государство работает с машинной скоростью: требования налоговой, постановления приставов и судебные извещения создаются потоком. Человек по-прежнему отвечает с человеческой скоростью. Мы убираем этот разрыв.</p>
+  <div class="pillars"><div><h3>Машинная скорость</h3><p>Ответ за минуты, на технологиях того же класса, что использует государство.</p></div><div><h3>Равные условия</h3><p>Правовая помощь не должна зависеть от того, кто может оплатить час юриста.</p></div><div><h3>Полная прозрачность</h3><p>Мы показываем, как работает система, что она умеет и чего не умеет. Без обещаний исхода дела.</p></div></div>
+</div></section>
+<section><div class="wrap stack">
+  <h2>Продукты</h2>
+  <div class="products">
+    <article class="product">
+      <p class="tag live">Работает · Россия</p>
+      <h3>Side</h3>
+      <p>Объясняет правовой документ простым языком и готовит рабочий ответ: приставы, налоговая, суды.</p>
+      <a href="https://legalside.ru">Открыть Side →</a>
+    </article>
+    <article class="product">
+      <p class="tag">В разработке</p>
+      <div class="mark" aria-hidden="true"><span>4</span><span>9</span><span>2</span><span>3</span><span class="c">5</span><span>7</span><span>8</span><span>1</span><span>6</span></div>
+      <h3>Платформа LoShu</h3>
+      <p>Одна платформа для всех сторон процесса: следствия, обвинения, суда, защиты, потерпевших и исполнения. Девять модулей, уравновешенных на магическом квадрате Ло Шу.</p>
+      <a href="../loshu/">Подробнее о LoShu →</a>
+    </article>
+  </div>
+</div></section>
+<section id="contact"><div class="wrap stack">
+  <h2>Инвесторы, гранты и партнёрства</h2>
+  <p class="body">Мы ищем партнёров: юридические фирмы, банки, исследовательские группы, фонды и грантовые программы.</p>
+  <div class="mail-row"><span class="mail" id="mail">ip.maa.mos@gmail.com</span><button class="copy" id="copy" type="button">Копировать</button></div>
+</div></section>
+</main>
+<footer class="wrap"><span>© 2026 Justice AI</span><a href="https://legalside.ru">Side → legalside.ru</a></footer>
+<script>
+document.getElementById("copy").addEventListener("click",function(){var b=this,m=document.getElementById("mail");
+function sel(){var r=document.createRange();r.selectNodeContents(m);var s=getSelection();s.removeAllRanges();s.addRange(r);}
+if(navigator.clipboard){navigator.clipboard.writeText(m.textContent).then(function(){b.textContent="\u0421\u043a\u043e\u043f\u0438\u0440\u043e\u0432\u0430\u043d\u043e";},sel);}else sel();});
+</script>
+</body>
+</html>

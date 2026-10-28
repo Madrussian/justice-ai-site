@@ -1,0 +1,376 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>LoShu · Justice AI</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="LoShu — платформа правосудия Justice AI для всех сторон процесса: следствия, обвинения, суда, защиты, потерпевших и исполнения. Девять модулей на магическом квадрате Ло Шу.">
+<link rel="canonical" href="https://justice-ai.tech/loshu/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LoShu — девять модулей справедливости">
+<meta property="og:description" content="Платформа правосудия для всех сторон процесса: девять модулей на магическом квадрате 3×3, где ни одна сторона не перевешивает.">
+<meta property="og:url" content="https://justice-ai.tech/loshu/">
+<meta name="robots" content="index,follow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,500;0,600;1,500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600&text=%E6%B4%9B%E4%B9%A6%E6%B4%AA%E8%8C%83%E4%B9%9D%E5%B7%9E&display=swap">
+<style>
+/* Layout: one reading column; the 3×3 square is the only wide object and the page's single bold moment. */
+:root{
+  --paper:#eef1ee;        /* cool celadon-grey ground */
+  --surface:#f7f9f7;
+  --ink:#16201d;          /* green-black ink */
+  --ink-soft:#4b5753;
+  --rule:#c9d1cd;
+  --jade:#2f6b5e;         /* accent: jade */
+  --jade-tint:#d9e7e2;
+  --seal:#a8382b;         /* cinnabar seal, used only for the centre and the sum */
+  --font-display:"Spectral", "Georgia", "Times New Roman", serif;
+  --font-body:"IBM Plex Sans", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  --font-mono:"IBM Plex Mono", "SFMono-Regular", Consolas, monospace;
+  --font-cjk:"Noto Serif SC", "Songti SC", "SimSun", serif;
+  --step-0:1rem; --step-1:1.2rem; --step-2:1.55rem; --step-3:2.1rem; --step-4:clamp(2.4rem, 6vw, 3.6rem);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#111816; --surface:#18211e; --ink:#e3e9e6; --ink-soft:#a3b0ab; --rule:#2c3833;
+    --jade:#7fbfae; --jade-tint:#1f332d; --seal:#e0796b; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#111816; --surface:#18211e; --ink:#e3e9e6; --ink-soft:#a3b0ab; --rule:#2c3833;
+  --jade:#7fbfae; --jade-tint:#1f332d; --seal:#e0796b; color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:var(--font-body); font-size:var(--step-0); line-height:1.6;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));
+  padding-right:max(16px, env(safe-area-inset-right, 0px));
+}
+a{color:var(--jade); text-underline-offset:3px}
+a:focus-visible, button:focus-visible{outline:2px solid var(--jade); outline-offset:3px; border-radius:2px}
+.wrap{max-width:44rem; margin:0 auto}
+.wide{max-width:60rem; margin:0 auto}
+
+.top{display:flex; justify-content:space-between; align-items:center; gap:1rem; flex-wrap:wrap;
+  padding-block:1.25rem; border-bottom:1px solid var(--rule); font-size:.9rem}
+.top a{color:var(--ink); text-decoration:none}
+.top a:hover{color:var(--jade)}
+.brand{font-weight:600; letter-spacing:.02em}
+
+h1,h2,h3{font-family:var(--font-display); font-weight:600; line-height:1.15; text-wrap:balance; margin:0}
+h2{font-size:var(--step-3)}
+h3{font-size:var(--step-1); font-family:var(--font-body); font-weight:600}
+p{margin:0}
+.eyebrow{font-family:var(--font-mono); font-size:.78rem; text-transform:uppercase; letter-spacing:.12em; color:var(--ink-soft)}
+.cjk{font-family:var(--font-cjk); font-weight:600}
+
+section{padding-block:3.5rem; border-bottom:1px solid var(--rule)}
+section:last-of-type{border-bottom:0}
+.stack{display:flex; flex-direction:column; gap:1rem}
+.stack-lg{display:flex; flex-direction:column; gap:1.75rem}
+.lead{font-size:var(--step-1); color:var(--ink)}
+.muted{color:var(--ink-soft)}
+
+/* Hero */
+.hero{padding-block:4rem 3rem}
+.hero-grid{display:grid; grid-template-columns:minmax(0,1fr) auto; gap:2rem; align-items:end}
+.hero h1{font-size:var(--step-4)}
+.hero .mark{font-size:clamp(3.5rem, 12vw, 6.5rem); line-height:1; color:var(--jade); writing-mode:vertical-rl; letter-spacing:.1em}
+@media (max-width:560px){ .hero-grid{grid-template-columns:1fr} .hero .mark{writing-mode:horizontal-tb} }
+
+/* The square */
+.square-block{display:grid; grid-template-columns:minmax(0, 22rem) minmax(0,1fr); gap:2.5rem; align-items:start}
+@media (max-width:760px){ .square-block{grid-template-columns:1fr} }
+.compass{font-family:var(--font-mono); font-size:.75rem; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-soft); text-align:center}
+.square-wrap{display:grid; grid-template-columns:1.6rem minmax(0,1fr) 1.6rem; grid-template-rows:auto auto auto; gap:.4rem; align-items:center; max-width:22rem; width:100%}
+.square-wrap .n{grid-column:2; grid-row:1}
+.square-wrap .s{grid-column:2; grid-row:3}
+.square-wrap .w{grid-column:1; grid-row:2; writing-mode:vertical-rl; transform:rotate(180deg)}
+.square-wrap .e{grid-column:3; grid-row:2; writing-mode:vertical-rl}
+.square{grid-column:2; grid-row:2; display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); border:2px solid var(--ink); background:var(--ink); gap:2px; aspect-ratio:1; max-width:100%}
+.cell{all:unset; box-sizing:border-box; cursor:pointer; background:var(--surface); display:flex; flex-direction:column; justify-content:space-between; padding:.5rem .55rem; min-width:0; transition:background .15s}
+.cell .num{font-family:var(--font-display); font-size:clamp(1.8rem, 7vw, 2.6rem); line-height:1; font-variant-numeric:tabular-nums}
+.cell .mod{font-size:.7rem; line-height:1.25; color:var(--ink-soft); overflow-wrap:anywhere}
+.cell.centre .num{color:var(--seal)}
+.cell:hover{background:var(--jade-tint)}
+.cell[aria-pressed="true"]{background:var(--jade); }
+.cell[aria-pressed="true"] .num, .cell[aria-pressed="true"] .mod{color:var(--paper)}
+.cell.on-line{background:var(--jade-tint)}
+.cell:focus-visible{outline:2px solid var(--jade); outline-offset:-4px}
+
+.lines{display:flex; flex-wrap:wrap; gap:.4rem}
+.line-btn{font-family:var(--font-mono); font-size:.8rem; border:1px solid var(--rule); background:transparent; color:var(--ink); padding:.35rem .6rem; border-radius:2px; cursor:pointer}
+.line-btn:hover{border-color:var(--jade)}
+.line-btn[aria-pressed="true"]{background:var(--ink); color:var(--paper); border-color:var(--ink)}
+.sum{font-family:var(--font-mono); font-size:var(--step-1); font-variant-numeric:tabular-nums; min-height:1.6em}
+.sum b{color:var(--seal); font-weight:500}
+
+.detail{border-left:2px solid var(--jade); padding-left:1rem; min-height:7.5rem}
+.detail .dir{font-family:var(--font-mono); font-size:.78rem; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-soft)}
+.detail h3{font-family:var(--font-display); font-size:var(--step-2); margin-block:.2rem .4rem}
+
+/* Module table */
+.table-scroll{overflow-x:auto}
+table{width:100%; border-collapse:collapse; font-size:.95rem}
+th, td{text-align:left; vertical-align:top; padding:.7rem .6rem; border-bottom:1px solid var(--rule)}
+th{font-family:var(--font-mono); font-weight:500; font-size:.75rem; text-transform:uppercase; letter-spacing:.1em; color:var(--ink-soft)}
+td.no{font-family:var(--font-display); font-size:1.35rem; font-variant-numeric:tabular-nums; width:2.5rem}
+td.dir{white-space:nowrap; color:var(--ink-soft); font-size:.88rem}
+td strong{font-weight:600}
+tr.centre-row td.no{color:var(--seal)}
+
+/* Comparison */
+.versus{display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:0; border-top:1px solid var(--ink); }
+.versus > div{padding:1rem 1rem 1rem 0; border-bottom:1px solid var(--rule); min-width:0}
+.versus > div:nth-child(even){padding-left:1rem; border-left:1px solid var(--rule)}
+.versus .h{font-family:var(--font-mono); font-size:.75rem; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-soft); padding-block:.6rem}
+@media (max-width:560px){ .versus{grid-template-columns:1fr} .versus > div:nth-child(even){padding-left:0; border-left:0} .versus .h:nth-child(2){display:none} }
+
+/* Cases */
+.case{display:flex; flex-direction:column; gap:.9rem}
+.case ol{margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:.55rem}
+.case li{display:grid; grid-template-columns:2.2rem minmax(0,1fr); gap:.6rem; align-items:baseline}
+.case li .k{font-family:var(--font-display); font-size:1.2rem; color:var(--jade); font-variant-numeric:tabular-nums}
+.case li .k.c{color:var(--seal)}
+.case li span.m{font-weight:600}
+
+.note{font-size:.88rem; color:var(--ink-soft)}
+.mail{font-family:var(--font-mono); font-size:.92em; user-select:all; overflow-wrap:anywhere}
+.cta{display:flex; flex-wrap:wrap; gap:.75rem; align-items:center}
+.btn{display:inline-block; background:var(--ink); color:var(--paper); text-decoration:none; padding:.7rem 1.1rem; font-weight:500; border-radius:2px}
+.btn:hover{background:var(--jade)}
+footer{padding-block:2rem 3rem; font-size:.85rem; color:var(--ink-soft); border-top:1px solid var(--rule)}
+
+@media (prefers-reduced-motion: reduce){ *{transition:none !important} }
+</style>
+</head>
+<body>
+
+<header class="top wide">
+  <a class="brand" href="https://justice-ai.tech/ru/">Justice AI</a>
+  <nav><a href="https://legalside.ru">Side</a></nav>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="stack-lg">
+        <p class="eyebrow">LoShu · платформа Justice AI</p>
+        <h1>Девять модулей. Любая линия равна пятнадцати.</h1>
+        <p class="lead">LoShu — платформа правосудия для всех сторон процесса: следствия и обвинения, суда, обвиняемых и защиты, потерпевших, исполнения. Девять модулей стоят в клетках магического квадрата Ло Шу. Сумма чисел в любой строке, столбце и диагонали одинакова, поэтому ни одна сторона не перевешивает другую.</p>
+      </div>
+      <div class="mark cjk" aria-hidden="true">洛书</div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap stack">
+      <h2>Коротко</h2>
+      <p>У каждой стороны процесса своя работа с одними и теми же документами. Следствие собирает доказательства, защита ищет в них слабые места, суд взвешивает, приставы исполняют. Сегодня каждая сторона делает это своими средствами и с разной скоростью. LoShu даёт всем сторонам общую основу — факты, доказательства, практику — и отдельный модуль для роли каждой. В центре стоит контроль, а не модель.</p><p>Первый продукт на платформе уже работает: Side помогает гражданам отвечать на документы приставов, налоговой и судов.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap stack">
+      <h2>Проблема</h2>
+      <p>Юридические сервисы собраны из разрозненных частей. Распознавание текста отдельно, поиск практики отдельно, генерация документа отдельно. Ни одна схема не объясняет, как эти части связаны и кто отвечает за итог.</p>
+      <p>Пользователь получает готовый текст, но не видит, откуда взялся вывод и что в нём проверено. Для правового документа это опасно: уверенная формулировка без опоры хуже, чем отсутствие ответа.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap stack">
+      <h2>Откуда квадрат</h2>
+      <p>Ло Шу (<span class="cjk">洛书</span>, «Писание реки Ло») — магический квадрат 3×3 из китайской традиции. По преданию, он явился Юю Великому, когда тот усмирял потоп. Юй — легендарный основатель династии Ся.</p>
+      <p>С Юем традиция связывает разделение страны на Девять провинций (<span class="cjk">九州</span>). Глава «Хун Фань» (<span class="cjk">洪范</span>, «Великий план») из «Книги документов» описывает девять разделов управления, переданных Юю. Позднейшая традиция прочитала девять клеток квадрата и девять разделов плана вместе, как схему устройства порядка.</p>
+      <p class="muted">Нам важна не мистика, а математика: девять чисел, каждое один раз, и равновесие по всем направлениям.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wide stack-lg">
+      <div class="wrap stack" style="margin:0">
+        <h2>Квадрат</h2>
+        <p>Числа от 1 до 9, каждое один раз. Сумма любой линии — 15, пятёрка стоит в центре. Юг сверху, как на традиционных китайских картах. Средняя строка — защита, баланс, обвинение: стороны уравновешены через центр. Выберите клетку или линию.</p>
+      </div>
+
+      <div class="square-block">
+        <div class="stack">
+          <div class="square-wrap">
+            <div class="compass n">Юг</div>
+            <div class="compass w">Восток</div>
+            <div class="square" id="square" role="group" aria-label="Квадрат Ло Шу, Юг сверху"></div>
+            <div class="compass e">Запад</div>
+            <div class="compass s">Север</div>
+          </div>
+          <div class="lines" id="lines" role="group" aria-label="Линии квадрата"></div>
+          <p class="sum" id="sum" aria-live="polite">&nbsp;</p>
+        </div>
+        <div class="detail" id="detail" aria-live="polite"></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wide stack">
+      <h2>Девять модулей</h2>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>№</th><th>Направление</th><th>Модуль</th><th>Кто пользуется</th><th>Что делает</th></tr></thead>
+          <tbody id="modtable"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap stack-lg">
+      <h2>Почему не Фемида</h2>
+      <p>Западная юстиция изображает справедливость женщиной с повязкой и весами. Для человека повязка значит беспристрастность. Для алгоритма она значит закрытый ящик.</p>
+      <div class="versus">
+        <div class="h">Фемида</div><div class="h">LoShu</div>
+        <div><strong>Повязка.</strong> В деле State v. Loomis (США, 2016) при вынесении приговора учли оценку закрытого алгоритма COMPAS. Ни подсудимый, ни суд не могли проверить, как она получена.</div>
+        <div><strong>Прозрачность.</strong> Каждый модуль виден по отдельности. Любую линию квадрата можно проследить: от фактов к выводу и от вывода к норме.</div>
+        <div><strong>Весы ждут.</strong> Правосудие начинается, когда к нему пришли.</div>
+        <div><strong>Разбор приходит первым.</strong> Side берёт документ, который уже прислало государство, и готовит ответ, пока не истёк срок.</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap stack">
+      <h2>В центре — человек</h2>
+      <p>Исследователи изучали, как судьи в Шэньчжэне работают с языковыми моделями. Частый сценарий: судья сначала решает сам, потом модель пишет обоснование под готовое решение. Модель в таком процессе не проверяет судью, а подкрепляет его первое впечатление.</p>
+      <p>Поэтому в центре квадрата LoShu стоит модуль контроля, а не модель. Balance Core собирает работу остальных восьми, показывает, на чём основан вывод, и останавливает выдачу, если запрос выходит за допустимые рамки. Модуль Decision готовит судье проект. Решает судья.</p>
+      <p class="note">Источник: «How do judges use large language models? Evidence from Shenzhen», Journal of Legal Analysis, 2024.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap stack-lg">
+      <h2>Как это работает сегодня: Side</h2>
+
+      <div class="case">
+        <h3>Арест счёта по постановлению пристава</h3>
+        <ol>
+          <li><span class="k">1</span><div><span class="m">Факты.</span> Распознаёт скан постановления: номер производства, сумма, даты, основание.</div></li>
+          <li><span class="k">4</span><div><span class="m">Доказательства.</span> Сверяет суммы между документами. Заменяет персональные данные метками до того, как текст уходит в модель.</div></li>
+          <li><span class="k">2</span><div><span class="m">Практика.</span> Подтягивает нормы закона об исполнительном производстве (229-ФЗ, ст. 99 и 101): сколько можно удерживать и на какие доходы взыскание не обращается.</div></li>
+          <li><span class="k">9</span><div><span class="m">Решение.</span> Формулирует позицию: что в аресте можно оспорить.</div></li>
+          <li><span class="k">7</span><div><span class="m">Требование.</span> Готовит заявление о сохранении прожиточного минимума.</div></li>
+          <li><span class="k c">5</span><div><span class="m">Баланс.</span> Финальная проверка перед выдачей.</div></li>
+        </ol>
+      </div>
+
+      <div class="case">
+        <h3>Требование налоговой об уплате пени</h3>
+        <ol>
+          <li><span class="k">1</span><div><span class="m">Факты.</span> Сумма, период, основание начисления.</div></li>
+          <li><span class="k">3</span><div><span class="m">Защита.</span> Ищет возражения: правильно ли посчитаны пени по ст. 75 НК РФ, верен ли период.</div></li>
+          <li><span class="k">2</span><div><span class="m">Практика.</span> Налоговый кодекс и Кодекс административного судопроизводства.</div></li>
+          <li><span class="k">7</span><div><span class="m">Требование.</span> Готовит возражение или жалобу.</div></li>
+          <li><span class="k">8</span><div><span class="m">Исполнение.</span> Указывает, в какой срок и куда подать ответ.</div></li>
+          <li><span class="k c">5</span><div><span class="m">Баланс.</span> Финальная проверка перед выдачей.</div></li>
+        </ol>
+      </div>
+
+      <p class="note">Side объясняет документ и готовит проект ответа. Он не заменяет юриста и не гарантирует исход дела.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap stack">
+      <h2>Куда мы идём</h2>
+      <p>Side закрывает одну роль — защиту граждан. Следующие шаги: закрытый контур для юридических фирм и банков, затем решения для следствия и суда. Для государственной стороны движок работает на собственной инфраструктуре заказчика: материалы дела не покидают контур, версии моделей зафиксированы, каждый вывод можно проверить.</p>
+      <p>Мы ищем партнёров: юридические фирмы, банки, исследовательские группы, фонды и гранты. Пишите: <span class="mail">ip.maa.mos@gmail.com</span></p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap cta">
+      <a class="btn" href="https://legalside.ru">Разобрать документ в Side</a>
+      <a href="https://justice-ai.tech/ru/">О Justice AI</a>
+    </div>
+  </section>
+</main>
+
+<footer class="wide">© 2026 Justice AI</footer>
+
+<script>
+(function(){
+  // Lo Shu, South on top, East on the left (Chinese map convention).
+  var cells = [
+    {n:4, dir:"Юго-Восток", el:"Дерево", mod:"Evidence", ru:"Доказательства", who:"Все стороны", what:"Извлекает сущности: имена, суммы, даты, номера. Сверяет их между документами и заменяет персональные данные метками до отправки в модель."},
+    {n:9, dir:"Юг", el:"Огонь", mod:"Decision", ru:"Решение", who:"Суд", what:"Готовит судье проект оценки и вывода с опорой на материалы дела. Решение принимает судья."},
+    {n:2, dir:"Юго-Запад", el:"Земля", mod:"Precedent", ru:"Практика", who:"Все стороны", what:"Подбирает нормы закона и судебную практику, на которые опирается вывод."},
+    {n:3, dir:"Восток", el:"Дерево", mod:"Defense", ru:"Защита", who:"Обвиняемый, защита", what:"Ищет контраргументы и слабые места в требовании другой стороны."},
+    {n:5, dir:"Центр", el:"Земля", mod:"Balance Core", ru:"Баланс", who:"Контроль и аудит", what:"Собирает работу восьми модулей, показывает основания вывода и останавливает выдачу, если запрос выходит за рамки."},
+    {n:7, dir:"Запад", el:"Металл", mod:"Prosecution", ru:"Требование", who:"Следствие, обвинение, истец", what:"Собирает обвинение, иск, претензию или жалобу так, чтобы их не вернули по форме."},
+    {n:8, dir:"Северо-Восток", el:"Земля", mod:"Execution", ru:"Исполнение", who:"Приставы, стороны", what:"Сроки и порядок подачи: куда, когда и в каком виде отправить документ."},
+    {n:1, dir:"Север", el:"Вода", mod:"Facts & Intake", ru:"Факты", who:"Все стороны", what:"Принимает документ: распознаёт скан или фото, выделяет структуру. Фундамент, без которого остальное не работает."},
+    {n:6, dir:"Северо-Запад", el:"Металл", mod:"Mediation & Oversight", ru:"Надзор", who:"Потерпевший, примирение", what:"Примирение и медиация, соблюдение процессуальных правил, отметка случаев, где нужен человек."}
+  ];
+  var lines = [
+    {id:"r1", label:"Строка 1", idx:[0,1,2]}, {id:"r2", label:"Строка 2", idx:[3,4,5]}, {id:"r3", label:"Строка 3", idx:[6,7,8]},
+    {id:"c1", label:"Столбец 1", idx:[0,3,6]}, {id:"c2", label:"Столбец 2", idx:[1,4,7]}, {id:"c3", label:"Столбец 3", idx:[2,5,8]},
+    {id:"d1", label:"Диагональ ↘", idx:[0,4,8]}, {id:"d2", label:"Диагональ ↙", idx:[2,4,6]}
+  ];
+  var sq = document.getElementById("square"), linesEl = document.getElementById("lines"),
+      sumEl = document.getElementById("sum"), detail = document.getElementById("detail"),
+      tbody = document.getElementById("modtable");
+  var btns = [];
+
+  cells.forEach(function(c, i){
+    var b = document.createElement("button");
+    b.type = "button"; b.id = "cell-" + c.n;
+    b.className = "cell" + (c.n === 5 ? " centre" : "");
+    b.setAttribute("aria-pressed", "false");
+    b.setAttribute("aria-label", c.n + ", " + c.dir + ": " + c.mod);
+    b.innerHTML = '<span class="num">' + c.n + '</span><span class="mod">' + c.mod + '</span>';
+    b.addEventListener("click", function(){ selectCell(i); });
+    sq.appendChild(b); btns.push(b);
+  });
+
+  lines.forEach(function(l){
+    var b = document.createElement("button");
+    b.type = "button"; b.id = "line-" + l.id; b.className = "line-btn";
+    b.setAttribute("aria-pressed", "false"); b.textContent = l.label;
+    b.addEventListener("click", function(){ selectLine(l, b); });
+    linesEl.appendChild(b);
+  });
+
+  cells.slice().sort(function(a,b){ return order(a) - order(b); }).forEach(function(c){
+    var tr = document.createElement("tr");
+    if (c.n === 5) tr.className = "centre-row";
+    tr.innerHTML = '<td class="no">' + c.n + '</td><td class="dir">' + c.dir + '</td><td><strong>' + c.mod + '</strong><br><span class="muted">' + c.ru + '</span></td><td>' + c.who + '</td><td>' + c.what + '</td>';
+    tbody.appendChild(tr);
+  });
+  function order(c){ return c.n === 5 ? 0 : c.n; }
+
+  function clear(){
+    btns.forEach(function(b){ b.setAttribute("aria-pressed","false"); b.classList.remove("on-line"); });
+    Array.prototype.forEach.call(linesEl.children, function(b){ b.setAttribute("aria-pressed","false"); });
+  }
+  function show(c){
+    detail.innerHTML = '<p class="dir">' + c.n + ' · ' + c.dir + ' · ' + c.el + '</p><h3>' + c.mod + '</h3><p><strong>' + c.who + '.</strong> ' + c.what + '</p>';
+  }
+  function selectCell(i){
+    clear(); btns[i].setAttribute("aria-pressed","true"); show(cells[i]); sumEl.innerHTML = "&nbsp;";
+  }
+  function selectLine(l, b){
+    clear(); b.setAttribute("aria-pressed","true");
+    l.idx.forEach(function(i){ btns[i].classList.add("on-line"); });
+    var nums = l.idx.map(function(i){ return cells[i].n; });
+    sumEl.innerHTML = nums.join(" + ") + " = <b>" + nums.reduce(function(a,b){ return a+b; }, 0) + "</b>";
+    detail.innerHTML = '<p class="dir">' + l.label + '</p><h3>' + l.idx.map(function(i){ return cells[i].mod; }).join(" · ") + '</h3><p>Три модуля этой линии вместе дают ту же сумму, что и любая другая линия.</p>';
+  }
+  selectCell(4);
+})();
+</script>
+</body>
+</html>
